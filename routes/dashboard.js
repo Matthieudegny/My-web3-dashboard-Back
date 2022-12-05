@@ -1,18 +1,18 @@
 const express = require("express");
 
+const {
+  createOrder,
+  getOneOrder,
+  getOrders,
+} = require("../controllers/dashboardController");
+
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.json({ mssg: "GET all the orders" });
-});
+router.get("/", getOrders);
 
-router.get("/:id", (req, res) => {
-  res.json({ mssg: "GET a single order" });
-});
+router.get("/:id", getOneOrder);
 
-router.post("/", (req, res) => {
-  res.json({ mssg: "POST a new workout" });
-});
+router.post("/", createOrder);
 
 router.delete("/:id", (req, res) => {
   res.json({ mssg: "DELETE a new workout" });
