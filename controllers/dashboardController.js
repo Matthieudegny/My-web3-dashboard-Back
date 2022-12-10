@@ -59,11 +59,52 @@ const createOrder = async (req, res) => {
 };
 
 //delete an order
+const deleteOrder = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Id is not valid" });
+  }
+  try {
+    const orderToDelete = await Order.findOneAndDelete({ _id: id });
+
+    if (!orderToDelete) {
+      //le return est pour éviter de continuer le code
+      return res.status(404).json({ error: "no order find with this id" });
+    }
+
+    res.status(200).json(orderToDelete);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 //update an order
+const updateOrder = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Id is not valid" });
+  }
+  try {
+    const orderToUpdate = await Order.findOneAndUpdate(
+      { _id: id },
+      { ...req.body }
+    );
+
+    if (!orderToUpdate) {
+      //le return est pour éviter de continuer le code
+      return res.status(404).json({ error: "no order find with this id" });
+    }
+
+    res.status(200).json(orderToUpdate);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
 
 module.exports = {
   getOneOrder,
   getOrders,
   createOrder,
+  deleteOrder,
+  updateOrder,
 };
