@@ -6,7 +6,8 @@ const { default: mongoose } = require("mongoose");
 const getOrders = async (req, res) => {
   //{} empty for .find to get all
   try {
-    const allOrders = await Order.find({}).sort({ createdAt: -1 });
+    //.sort{{date -1}} from the newest orde to the oldest
+    const allOrders = await Order.find({}).sort({ date: -1 });
 
     res.status(200).json(allOrders);
   } catch (error) {

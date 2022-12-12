@@ -32,10 +32,6 @@ const dashboardSchema = new Schema(
       type: Number,
       required: true,
     },
-    balance: {
-      type: Number,
-      required: true,
-    },
   },
   //add the info about the date creation
   { timestamps: true }
