@@ -18,7 +18,6 @@ const getOrders = async (req, res) => {
 //get one order
 const getOneOrder = async (req, res) => {
   const { id } = req.params;
-  console.log("id", id);
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({ error: "Id is not valid" });
   }
