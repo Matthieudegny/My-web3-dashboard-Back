@@ -6,6 +6,8 @@ const {
   getOrders,
   deleteOrder,
   updateOrder,
+  loginUser,
+  signupUser,
 } = require("../controllers/dashboardController");
 
 const router = express.Router();
@@ -20,6 +22,8 @@ router.delete("/:id", deleteOrder);
 
 router.patch("/:id", updateOrder);
 
-router.get("/hello", () => {});
+router.post("/login", loginUser);
+
+router.post("/signup", signupUser);
 
 module.exports = router;
