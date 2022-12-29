@@ -74,7 +74,6 @@ const deleteOrder = async (req, res) => {
     const orderToDelete = await Order.findOneAndDelete({ _id: id });
 
     if (!orderToDelete) {
-      //le return est pour éviter de continuer le code
       return res.status(404).json({ error: "no order find with this id" });
     }
 
@@ -129,6 +128,36 @@ const signupUser = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Id is not valid" });
+  }
+  try {
+    const userToDelete = await User.findOneAndDelete({ _id: id });
+
+    if (!userToDelete) {
+      return res.status(404).json({ error: "no user find with this id" });
+    }
+
+    res.status(200).json(userToDelete);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const getAllUSer = async (req, res) => {
+  //{} empty for .find to get all
+  try {
+    //.sort{{date -1}} from the newest orde to the oldest
+    const allUsers = await User.find({});
+
+    res.status(200).json(allUsers);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports = {
   getOneOrder,
   getOrders,
@@ -137,4 +166,6 @@ module.exports = {
   updateOrder,
   loginUser,
   signupUser,
+  deleteUser,
+  getAllUSer,
 };
