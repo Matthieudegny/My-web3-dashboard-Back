@@ -6,30 +6,23 @@ const {
   getOrders,
   deleteOrder,
   updateOrder,
-  loginUser,
-  signupUser,
-  deleteUser,
-  getAllUSer,
 } = require("../controllers/dashboardController");
+
+//require for all routes
+const requireAuth = require("../middleware/requireauth");
 
 const router = express.Router();
 
+// router.use(requireAuth);
+
 router.get("/", getOrders);
 
-router.get("/user", getAllUSer);
+router.get("/:id", requireAuth, getOneOrder);
 
-router.get("/:id", getOneOrder);
+router.post("/", requireAuth, createOrder);
 
-router.post("/", createOrder);
+router.delete("/:id", requireAuth, deleteOrder);
 
-router.delete("/:id", deleteOrder);
-
-router.patch("/:id", updateOrder);
-
-router.post("/login", loginUser);
-
-router.post("/signup", signupUser);
-
-router.delete("/user/:id", deleteUser);
+router.patch("/:id", requireAuth, updateOrder);
 
 module.exports = router;
