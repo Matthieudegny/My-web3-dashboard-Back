@@ -16,6 +16,6 @@ router.post("/signup", signupUser);
 
 router.delete("/user/:id", deleteUser);
 
-router.get("/user", getAllUSer);
+router.get("/getAllUsers", getAllUSer);
 
 module.exports = router;
