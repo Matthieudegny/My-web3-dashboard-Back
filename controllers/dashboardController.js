@@ -7,7 +7,7 @@ const { default: mongoose } = require("mongoose");
 const createToken = (_id) => {
   return jwt.sign({ _id: _id }, process.env.SECRET, { expiresIn: "3d" });
 };
-
+//test a suppr
 //get all orders
 const getOrders = async (req, res) => {
   //{} empty for .find to get all
